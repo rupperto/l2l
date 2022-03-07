@@ -45,7 +45,8 @@ Az MVC az adat (Model), a vezérlő (Controller) és a nézet (View) hármasa, i
 
 Mivel az Entity Framework gyakorlatilag "tükrözi" az adatbázist, lehetne ez az MVC modelje, és már csak a vezérlő és a nézet kell. Igen ám, de mi legyen az API-val ekkor később? Annak minimum az adatokhoz hozzá kell férnie!
 
-Második vázlat
+## Második vázlat
+
 DB EF Model MVC WebApp
 +-----------------+ +----------------------+ +--------------------------------------+
 | | | | | |
@@ -60,7 +61,8 @@ DB EF Model MVC WebApp
 +-----------------+ +----------------------+ +--------------------------------------+
 Ha kiemeljük az EF modelt az alkalmazásunkból, akkor az API ugyan majd később hozzáfér az adatokhoz, de milyen áron? A webalkalmazásban lévő logikai lépéseket meg kell ismételnie, így duplán dolgozunk, vagy duplikálunk, ez ugyan nem rossz megoldás, de még nem is jó.
 
-Harmadik vázlat
+## Harmadik vázlat
+
 Service
 DB Repository MVC WebApp
 +-----------------+ +----------------------+ +-----------+ +--------------------------------------+
@@ -76,12 +78,15 @@ DB Repository MVC WebApp
 +-----------------+ +----------------------+ +-----------+ +--------------------------------------+
 Ha az EF modell mellett kiemeljük a szervezési feladatokat (legyen mondjuk üzleti logika a neve, az olyan szakzsargon-pozitív, vagy Service), akkor már van olyan pont, ahol az API be tud kapcsolódni, és lehetőség szerint nem duplikálunk majd a megvalósításnál már eleve tervezett módon kilométernyi kódokat.
 
-Objektumorientált tervezési gondolatok (OOD)
-Csatolás (Coupling): ha egy elem függ más elemektől, akkor ezek az elemek csatolásban vannak.
+## Objektumorientált tervezési gondolatok (OOD)
+
+## Csatolás (Coupling): ha egy elem függ más elemektől, akkor ezek az elemek csatolásban vannak.
+
 gyenge (Low) ez a csatolás abban az esetben, ha a csatolásban lévő elemek esetén egy változás továbbterjedése megállítható.
 Első célunk tehát: a gyenge csatolás (Low Coupling) elérése a dobozaink között.
 
-Kohézió (Cohesion): Egy elem felelősségeinek egymáshoz való kapcsolata.
+## Kohézió (Cohesion): Egy elem felelősségeinek egymáshoz való kapcsolata.
+
 a kohézió gyenge (low), ha az adott elemnek túl sok egymástól független felelőssége van.
 a kohézió erős (high), ha az adott elem felelősségei erősen összefüggnek és nagyon koncentráltak.
 Célunk tehát az Erős kohézió (High Cohesion) elérése a dobozokon belül.
