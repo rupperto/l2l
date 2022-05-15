@@ -14,6 +14,12 @@ namespace l2l.Data.Repository
 
         }
 
+        public CourseRepository(L2lDBContext db)
+        {
+            //dependenci Injection eseten mindig erdemes Null izsgalat
+            this.db = db
+                ?? throw new ArgumentNullException(nameof(db));
+        }
 
         public void Add(Course course)
         {
@@ -41,7 +47,7 @@ namespace l2l.Data.Repository
 
         public void Remove(Course course)
         {
-            //TODO:Reurn Void???
+            //TODO:Reurn
             db.Courses.Remove(course);
         }
     }

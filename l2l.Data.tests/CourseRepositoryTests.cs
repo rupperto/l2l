@@ -8,26 +8,28 @@ namespace l2l.Data.Tests
     /// <summary>
     /// CRUD and  List Test / adatbazis muveletek
     /// </summary>
-    public class CourseRepositoryTests
+    public class CourseRepositoryTests : IClassFixture<DatabaseFixture>
     {
 
+        public DatabaseFixture fixture { get; }
 
         //construktor letrehozasa CTOR tab tab
-        public CourseRepositoryTests()
-
+        //classikus dependenci Injection
+        public CourseRepositoryTests(DatabaseFixture fixture)
         {
-            var factory = new L2lDBContextFactory(); //dbcontextre szukseg van
-            var db = factory.CreateDbContext(new string[] { }); //kerjuk el tole az aktualis dbcontextet, uj string tombot kell neki atadni, elmentjuk a db nevu valtozo
+            this.fixture = fixture
+                ?? throw new System.ArgumentNullException(nameof(fixture)); // null check
 
-            db.Database.EnsureCreated(); //biztositsa szamunkara, hogy az adatbazis lere lett hozva
         }
+
+
         [Fact]
 
         public void CourseRepositoryTests_AddedCoursesShouldBeAppearInRepository()
         {
             //Arrange - elokeszuletek
             // SUT : System Under Test
-            var sut = new CourseRepository();
+            var sut = new CourseRepository(fixture.GetNewL2lDBContext());
             var course = new Course { ID = 1, Name = "Test Course" };
 
             //Act tesztelendo muveletek
@@ -51,7 +53,7 @@ namespace l2l.Data.Tests
         {
             //Arrange - elokeszuletek
             // SUT : System Under Test
-            var sut = new CourseRepository();
+            var sut = new CourseRepository(fixture.GetNewL2lDBContext());
             var course = new Course { ID = 1, Name = "Test Course" };
             sut.Add(course);
 
@@ -75,7 +77,7 @@ namespace l2l.Data.Tests
         {
             //Arrange - elokeszuletek
             // SUT : System Under Test
-            var sut = new CourseRepository();
+            var sut = new CourseRepository(fixture.GetNewL2lDBContext());
             var course = new Course { ID = 1, Name = "Test Course" };
             sut.Add(course);
 
@@ -99,7 +101,7 @@ namespace l2l.Data.Tests
         public void CourseRepositoryTests_ExistingCoursesShouldBeDelete()
         {
 
-            var sut = new CourseRepository();
+            var sut = new CourseRepository(fixture.GetNewL2lDBContext());
             var course = new Course { ID = 1, Name = "Test Course" };
             sut.Add(course);
 
