@@ -16,7 +16,7 @@ namespace l2l.Data.Repository
 
         public CourseRepository(L2lDBContext db)
         {
-            //dependenci Injection eseten mindig erdemes Null izsgalat
+            //dependenci Injection eseten mindig erdemes Null vizsgalat
             this.db = db
                 ?? throw new ArgumentNullException(nameof(db));
         }
